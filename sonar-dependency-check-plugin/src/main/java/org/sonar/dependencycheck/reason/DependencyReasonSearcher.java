@@ -83,6 +83,17 @@ public class DependencyReasonSearcher {
                 LOGGER.debug("Found unreasonable npm file {}", npmReason);
             }
         }
+        String[] nugetPathPatterns = {"**/*.csproj", "**/*.vbproj"};
+        Iterable<InputFile> nugetProjects = context.fileSystem().inputFiles(context.fileSystem().predicates().matchesPathPatterns(nugetPathPatterns));
+        for (InputFile nugetProject : nugetProjects) {
+            DependencyReason nugetReason = new NugetDependencyReason(nugetProject);
+            if (nugetReason.isReasonable()) {
+                dependencyReasons.add(nugetReason);
+                LOGGER.debug("Found reasonable nuget project file {}", nugetReason);
+            } else {
+                LOGGER.debug("Found unreasonable nuget project file {}", nugetReason);
+            }
+        }
     }
 
     /**

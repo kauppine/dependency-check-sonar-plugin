@@ -87,4 +87,8 @@ public class Identifier {
     public static boolean isJavaScriptPackage(@NonNull Identifier identifier) {
         return "javascript".equals(Identifier.getPackageType(identifier).orElse(""));
     }
+
+    public static boolean isNugetPackage(@NonNull Identifier identifier) {
+        return "nuget".equals(Identifier.getPackageType(identifier).orElse(""));
+    }
 }

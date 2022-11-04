@@ -135,6 +135,15 @@ public final class DependencyCheckUtils {
         return Optional.empty();
     }
 
+    public static Optional<Identifier> getNugetIdentifier(@NonNull Dependency dependency) {
+        for (Identifier identifier : dependency.getPackages()) {
+            if (Identifier.isNugetPackage(identifier)) {
+                return Optional.of(identifier);
+            }
+        }
+        return Optional.empty();
+    }
+
     /**
      * TODO: Add Markdown formatting if and when Sonar supports it
      * https://jira.sonarsource.com/browse/SONAR-4161
